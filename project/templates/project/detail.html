@@ -1,0 +1,43 @@
+{% extends 'project/main.html' %}
+
+{% block content %}
+<style>
+    .home-container{
+        display: grid;
+        margin-top: 25px;
+        margin-left: 25px;
+        grid-template-columns: 3fr 3fr;
+    }
+</style>
+<div class ="home-container">
+<div>
+    <a  class = "btn btn-primary" href = "{% url 'update' detail.id %}" role="button"> Update </a> <hr>
+    <h1> Project Details </h1> <hr>
+    <h3>
+        
+       Project Name : {{detail.project_name}}  <br> <br>
+       Project Description : {{detail.description}} <br> <br>
+       Project Created Date : {{detail.created_date}} <br> <br>
+       Project Started Date : {{detail.start_date}} <br> <br>
+       Project End Date : {{detail.end_date}} <br> 
+
+    </h3>
+</div>
+<div>
+    <br>
+   <h1> Tasks </h1>
+   <div class="container">
+   <a class = "btn btn-primary" role ="button" href="{% url 'createtask' detail.id %}"> Add Task </a> <hr>
+   <div class="row row-cols-3">
+   {% for tasks in task %}
+   <div class ="cd">
+  <a href="{% url 'viewtask' tasks.id %}"><h4> {{tasks.task_name}}</h4> 
+<br>
+<small> {{tasks.status }}</small></a>
+</div>
+   {% endfor %}
+</div>
+</div>
+</div>
+</div>
+{% endblock content%}

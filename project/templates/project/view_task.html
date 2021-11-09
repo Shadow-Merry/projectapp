@@ -1,0 +1,43 @@
+{% extends 'project/main.html' %}
+
+{% block content %}
+<style>
+    .home-container{
+        display: grid;
+        margin-top: 25px;
+        margin-left: 25px;
+        grid-template-columns: 3fr 3fr;
+    }
+</style>
+<div class ="home-container">
+<div>
+    <a class ="btn btn-primary" role="button" href="{% url 'updatetask' task.id %}"> Update </a>  <hr>
+    <h1> Task Detail </h1> <hr>
+    <h4>
+        
+       Task Name : {{task.task_name}}  <br> <br>
+       Task Description : {{task.task_description}} <br> <br>
+       Task Assigned To : {{task.assigned_to}} <br> <br>
+       Priority: {{task.priority}} <br> 
+
+    </h4>
+</div>
+<div>
+    <br>
+   <h1> Sub Tasks </h1>
+   <div class="container">
+   <a class ="btn btn-primary" role="button" href="{% url 'createsubtask' task.id %}"> Add Sub Task </a> <hr>
+   <div class="row row-cols-3">
+   {% for s in sub %}
+   <div class ="cd">
+<a href="{% url 'viewsub' s.id %}"> 
+     <h4> {{s.subtask_name }}</h4> <br>
+     <small> {{ s.status }}</small>
+    </a> 
+   </div>
+   {% endfor %}
+</div>
+</div>
+</div>
+</div>
+{% endblock content %}
